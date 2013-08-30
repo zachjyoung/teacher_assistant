@@ -76,8 +76,19 @@ grade_averager = GradeAverager.new
 students.each do |student|
 	student.average = grade_averager.calculate_average(student.grades)
 	puts "#{student.name}: #{student.average}"
-end
 
+	if student.average >= 90
+		puts "#{student.name}: A"
+	elsif student.average >= 80 && student.average < 90
+		puts "#{student.name}: B"
+	elsif student.average >= 70 && student.average < 80
+		puts "#{student.name}: C"
+	elsif student.average >= 60 && student.average < 70
+		puts "#{student.name}: D"
+	elsif student.average < 60
+		puts "#{student.name}: F"
+	end
+end
 
 
 

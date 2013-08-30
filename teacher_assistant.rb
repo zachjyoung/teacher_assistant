@@ -14,17 +14,17 @@ class GraderReader
   end
 end
 
-class AssignmentGrade <GradeReader
+class AssignmentGrade < GradeReader
 end
 
-class FinalGrade <GradeReader
+class FinalGrade < GradeReader
 
 end
 
-class Student <GradeReader
+class Student < GradeReader
 end
 
-class GradeSummary <GradeReader
+class GradeSummary < GradeReader
 end
 
 csv_reader

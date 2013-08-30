@@ -10,12 +10,18 @@ class GradeReader
 
   def initialize
     CSV.foreach('students.csv') do |row|
-    puts row.join(' | ')
+    puts row.join(',')
+    end
+    @grades = {}
+    CSV.foreach('students.csv') do |row|
+    	name = row.shift
+    	@grades[name] = row.map { |grade| grade.to_i  }    	
     end
   end
 end
 
 class AssignmentGrade < GradeReader
+
 end
 
 class FinalGrade < GradeReader
@@ -30,7 +36,7 @@ end
 
 assistant = GradeReader.new
 
-puts assistant
+
 
 
 # Design a CSV with the data that is provided in implementation details

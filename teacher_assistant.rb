@@ -5,6 +5,7 @@
 # GradeSummary - an object that encapsulates the concept of the class' aggregate performance
 
 require 'CSV'
+require 'pry'
 
 class GradeReader 
 
@@ -12,16 +13,42 @@ class GradeReader
     CSV.foreach('students.csv') do |row|
     puts row.join(',')
     end
-    @grades = {}
-    CSV.foreach('students.csv') do |row|
-    	name = row.shift
-    	@grades[name] = row.map { |grade| grade.to_i  }    	
-    end
   end
+
+  def grades_for_students(file_path)
+  	students = []
+
+  	CSV.foreach(file_path) do |row|
+  		student = grades_for_student(row)
+  		students << student
+  	end
+
+  	students
+  end
+
+  def grades_for_student(row)
+  	name = row.shift
+  	grades = row.collect{|i| i.to_i}
+  	student = Student.new(name, grades)
+
+  	# student = {}
+  	# name = row.shift
+  	# student[:name] = name
+  	# student[:grade] = row
+
+  	student
+	end	
 end
 
-class AssignmentGrade < GradeReader
 
+class GradeAverager < GradeReader
+	def initialize
+
+	end
+
+	def calculate_average(grades)
+		grades.inject{|sum, grade| sum + grade } / grades.count
+	end
 end
 
 class FinalGrade < GradeReader
@@ -29,12 +56,27 @@ class FinalGrade < GradeReader
 end
 
 class Student < GradeReader
+	attr_accessor :name, :grades, :average
+	
+	def initialize(name, grades)
+		@name = name
+		@grades = grades
+	end
 end
 
 class GradeSummary < GradeReader
 end
 
-assistant = GradeReader.new
+grade_reader = GradeReader.new
+
+students = grade_reader.grades_for_students('students.csv')
+
+grade_averager = GradeAverager.new
+
+students.each do |student|
+	student.average = grade_averager.calculate_average(student.grades)
+	puts "#{student.name}: #{student.average}"
+end
 
 
 

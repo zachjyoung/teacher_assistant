@@ -10,7 +10,7 @@ class GradeReader
 
   def initialize
     CSV.foreach('students.csv') do |row|
-    row.join(' | ')
+    puts row.join(' | ')
     end
   end
 end

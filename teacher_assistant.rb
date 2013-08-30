@@ -6,8 +6,9 @@
 
 require 'CSV'
 
-class GraderReader 
-  def csv_reader
+class GradeReader 
+
+  def initialize
     CSV.foreach('students.csv') do |row|
     puts row.join(' | ')
     end
@@ -27,7 +28,10 @@ end
 class GradeSummary < GradeReader
 end
 
-csv_reader
+assistant = GradeReader.new
+
+puts assistant
+
 
 # Design a CSV with the data that is provided in implementation details
 # Load that CSV into an appropriate data structure that correlates student names with all of their grades.

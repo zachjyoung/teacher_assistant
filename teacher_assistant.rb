@@ -6,6 +6,7 @@
 
 require 'CSV'
 require 'pry'
+require 'ruby-standard-deviation'
 
 class GradeReader 
 
@@ -96,6 +97,7 @@ end
 puts total_class
 puts total_class.max
 puts total_class.min
+puts total_class.stdev
 
 
 # Save into an array

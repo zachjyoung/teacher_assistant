@@ -67,6 +67,8 @@ end
 class GradeSummary < GradeReader
 end
 
+total_class = []
+
 grade_reader = GradeReader.new
 
 students = grade_reader.grades_for_students('students.csv')
@@ -75,6 +77,7 @@ grade_averager = GradeAverager.new
 
 students.each do |student|
 	student.average = grade_averager.calculate_average(student.grades)
+	total_class << student.average
 	puts "#{student.name}: #{student.average}"
 
 	if student.average >= 90
@@ -90,33 +93,23 @@ students.each do |student|
 	end
 end
 
+puts total_class
+puts total_class.max
+puts total_class.min
 
 
-# Design a CSV with the data that is provided in implementation details
-# Load that CSV into an appropriate data structure that correlates student names with all of their grades.
-# Once loaded, list the students and their grades
-
-# With the loaded data, calculate a student's average based on their test scores
-# Output each student's name and average score
-
-# Take the average score for each student and assign a correlating letter grade
-# If the score is greater than or equal to 90, assign an A
-# If the score is greater than or equal to 80 but less than 90, assign a B
-# If the score is greater than or equal to 70 but less than 80, assign a C
-# If the score is greater than or equal to 60 but less than 70, assign a D
-# If the score is less than 60, assign an F
-# Output each student's name and final letter grade
-
-# The file should be sorted by last name, first name
-# The file should contain the average score (rounded to the first decimal) and the letter grade for each student
-
+# Save into an array
 # The average score across the class is outputted
 # The minimum score across the class is outputted
 # The maximum score across the class is outputted
 # The standard deviation across the class is outputted
+
+# The file should be sorted by last name, first name
+# The file should contain the average score (rounded to the first decimal) and the letter grade for each student
 
 # Acceptance Criteria: 
 # * I receive an error if the file does not exist 
 # * I receive an error if the file is not the intended extension 
 # * I receive an error if an entry doesn't have the same number of grades as the others 
 # * If the file is valid, it provides the source data that runs the program
+

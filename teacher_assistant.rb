@@ -94,22 +94,22 @@ students.each do |student|
 	end
 end
 
-max_grade = []
-min_grade =[]
-standard_deviation = []
+# max_grade = []
+# min_grade =[]
+# standard_deviation = []
 
 
-max_grade = total_class.max.round
-min_grade = total_class.min.round
-standard_deviation = total_class.stdev.round
+# max_grade = total_class.max.round
+# min_grade = total_class.min.round
+# standard_deviation = total_class.stdev.round
 
 #it was looking for an array instead of a string, so I put them into arrays
 
 CSV.open("final_grades.csv", "w") do |final_grades|
   final_grades << total_class
-  final_grades << [max_grade]
-  final_grades << [min_grade]
-  final_grades << [standard_deviation]
+  final_grades << [total_class.max]
+  final_grades << [total_class.min]
+  final_grades << [total_class.stdev]
 end
 
 

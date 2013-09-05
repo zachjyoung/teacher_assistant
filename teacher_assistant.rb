@@ -88,6 +88,7 @@ class GradeSummary < GradeReader
 		CSV.open(file_name, "w") do |csv|
 			@students.each do |student|
 				csv << student.stats
+				csv
 			end
 		end
 	end

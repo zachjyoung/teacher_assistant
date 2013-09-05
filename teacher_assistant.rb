@@ -94,33 +94,26 @@ class GradeSummary < GradeReader
 end
 
 
-puts "File bro?"
-input = gets.chomp
+# puts "File bro?"
+# input = gets.chomp
 
-summarizer = GradeSummary.new
-summarizer.write_summary(input)
+# summarizer = GradeSummary.new
+# summarizer.write_summary(input)
 
+total_class = []
 
+grade_reader = GradeReader.new
 
-# total_class = []
+students = grade_reader.grades_for_students('students.csv')
 
-# grade_reader = GradeReader.new
+grade_averager = GradeAverager.new
 
-# students = grade_reader.grades_for_students('students.csv')
+students.each do |student|
+	student.average = grade_averager.calculate_average(student.grades)
+	total_class << student.average
+end
 
-# grade_averager = GradeAverager.new
+puts "Maximum score of the class: #{total_class.max}." 
+puts "Minimum score of the class: #{total_class.min}."
+puts "Standard deviation of the class: #{total_class.stdev}."
 
-# students.each do |student|
-# 	student.average = grade_averager.calculate_average(student.grades)
-# 	total_class << student.average
-# 	puts "#{student.name}: #{student.average}"
-# end
-
-
-
-# CSV.open("final_grades.csv", "w") do |final_grades|
-#   final_grades << total_class
-#   final_grades << [total_class.max]
-#   final_grades << [total_class.min]
-#   final_grades << [total_class.stdev]
-# end

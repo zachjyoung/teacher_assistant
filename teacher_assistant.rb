@@ -1,9 +1,3 @@
-# GradeReader - an object that is responsible for reading in grade data from a CSV.
-# AssignmentGrade - an object that encapsulates the concept of a given assignment grade
-# FinalGrade - an object that encapsulates the concept of a student's final grade
-# Student - an object that represents a participant in a class
-# GradeSummary - an object that encapsulates the concept of the class' aggregate performance
-
 require 'CSV'
 require 'pry'
 require 'ruby-standard-deviation'
@@ -41,7 +35,6 @@ class GradeReader
 	end	
 end
 
-
 class GradeAverager < GradeReader
 	def initialize
 
@@ -53,6 +46,11 @@ class GradeAverager < GradeReader
 end
 
 class FinalGrade < GradeReader
+  # def initialize
+  # end
+
+  # def 
+  # end
 
 end
 
@@ -94,14 +92,12 @@ students.each do |student|
 	end
 end
 
-# max_grade = []
-# min_grade =[]
-# standard_deviation = []
+puts "Maximum score of the class " + total_class.max.to_s
+puts "Minimum score of the class " + total_class.min.to_s
+puts "Standard deviation of the class was " + total_class.stdev.to_s
 
 
-# max_grade = total_class.max.round
-# min_grade = total_class.min.round
-# standard_deviation = total_class.stdev.round
+
 
 #it was looking for an array instead of a string, so I put them into arrays
 

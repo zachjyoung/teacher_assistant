@@ -67,7 +67,7 @@ class FinalGrade < GradeReader
 end
 
 class Student < GradeReader
-	attr_accessor :name
+	attr_accessor :name, :grades
 	def initialize(name, grades)
 		@name = name
 		@grades = grades
@@ -99,26 +99,23 @@ class GradeSummary < GradeReader
 	end
 end
 
-
 puts "File bro?"
 input = gets.chomp
 
 summarizer = GradeSummary.new
 summarizer.write_summary(input)
 
-# total_class = []
+total_class = []
 
-# grade_reader = GradeReader.new
+grade_reader = GradeReader.new
 
-# students = grade_reader.grades_for_students('students.csv')
+students = grade_reader.grades_for_students('students.csv')
 
-# grade_averager = GradeAverager.new
+students.each do |student|
+	grade_averager = GradeAverager.new(student.grades)
+	total_class << grade_averager.calculate_average
+end
 
-# students.each do |student|
-# 	student.average = grade_averager.calculate_average(student.grades)
-# 	total_class << student.average
-# end
-
-# puts "Maximum score of the class: #{total_class.max}." 
-# puts "Minimum score of the class: #{total_class.min}."
-# puts "Standard deviation of the class: #{total_class.stdev}."
+puts "Maximum score of the class: #{total_class.max}." 
+puts "Minimum score of the class: #{total_class.min}."
+puts "Standard deviation of the class: #{total_class.stdev}."

@@ -67,6 +67,7 @@ class FinalGrade < GradeReader
 end
 
 class Student < GradeReader
+	attr_accessor :name
 	def initialize(name, grades)
 		@name = name
 		@grades = grades
@@ -77,6 +78,10 @@ class Student < GradeReader
 		grader = FinalGrade.new(averager.calculate_average)
 	 	[@name, grader.letter_grade, averager.calculate_average]
 	end
+
+	def last_name
+		@name.split(' ').last
+	end
 end
 
 class GradeSummary < GradeReader
@@ -85,10 +90,10 @@ class GradeSummary < GradeReader
 	end
 
 	def write_summary(file_name)
+		@students.sort! { |name_one, name_second| name_one.last_name <=> name_second.last_name }
 		CSV.open(file_name, "w") do |csv|
 			@students.each do |student|
 				csv << student.stats
-				csv
 			end
 		end
 	end
